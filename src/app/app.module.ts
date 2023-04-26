@@ -16,11 +16,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
     BrowserModule,
     MatTableModule,
+    MatPaginatorModule,
     MatNativeDateModule,
     ReactiveFormsModule,
     RouterModule.forRoot([{ path: '', component: ProductListComponent }]),
