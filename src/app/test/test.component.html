@@ -1,0 +1,19 @@
+<p>test works!</p>
+<!-- <input type="text" [(ngModel)]="myText" (keypress)="keyEvent($event)" /> -->
+<input
+  id="myId"
+  type="text"
+  name="myInput"
+  value="10"
+  minlength="1"
+  maxlength="2"
+  size="10"
+/>
+<button type="button" (click)="generate()">Generate New Data</button>
+<div
+  echarts
+  [options]="options"
+  [merge]="mergeOptions"
+  class="demo-chart"
+></div>
+<app-signal-table></app-signal-table>
