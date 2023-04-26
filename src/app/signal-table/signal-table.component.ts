@@ -53,6 +53,21 @@ export class SignalTableComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+
+    // both are working here
+    // this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    // this.refresh();
+  }
+
+  refresh(): void {
+    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    this.dataSource.data.push({
+      position: 1,
+      name: 'S1',
+      peak_position: 1.0079,
+      data: [1, 2, 3, 4],
+    });
+    this.dataSource.data = this.dataSource.data;
   }
 
   add() {
@@ -64,16 +79,24 @@ export class SignalTableComponent implements OnInit {
     //   data: [2, 2, 2, 2],
     // });
 
-    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    // not working here - but working in ngOnInit
+    // this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    // this.dataSource.data.push({
+    //   position: 1,
+    //   name: 'S1',
+    //   peak_position: 1.0079,
+    //   data: [1, 2, 3, 4],
+    // });
 
-    this.dataSource.data.push({
-      position: 1,
-      name: 'S1',
-      peak_position: 1.0079,
-      data: [1, 2, 3, 4],
-    });
-    // window.alert(this.dataSource.data.length.toString());
-    this.dataSource.data = this.dataSource.data;
+    // // window.alert(this.dataSource.data.length.toString());
+    // this.dataSource.data = this.dataSource.data;
+    // this.refresh();
+
+    let cloned = this.dataSource.data.slice();
+    // Or in ECMAScript 2015 (ES6): // let cloned = [...dataSource]
+    this.dataSource.data = cloned;
+
+    this.paginator.nextPage();
     this.table.renderRows();
   }
 }
