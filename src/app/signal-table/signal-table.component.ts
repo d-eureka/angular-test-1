@@ -49,7 +49,7 @@ export class SignalTableComponent implements OnInit {
   dataSource = new MatTableDataSource<SignalElement>([]);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
+  @ViewChild(MatTable) table!: MatTable<any>;
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -57,13 +57,23 @@ export class SignalTableComponent implements OnInit {
 
   add() {
     // window.alert('Update table');
-    ELEMENT_DATA.push({
-      position: 10,
-      name: 'SX',
-      peak_position: 10,
-      data: [2, 2, 2, 2],
+    // ELEMENT_DATA.push({
+    //   position: 10,
+    //   name: 'SX',
+    //   peak_position: 10,
+    //   data: [2, 2, 2, 2],
+    // });
+
+    this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+    this.dataSource.data.push({
+      position: 1,
+      name: 'S1',
+      peak_position: 1.0079,
+      data: [1, 2, 3, 4],
     });
-    this.dataSource.data = ELEMENT_DATA;
+    // window.alert(this.dataSource.data.length.toString());
+    this.dataSource.data = this.dataSource.data;
     this.table.renderRows();
   }
 }
