@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTable } from '@angular/material/table';
 
 export interface PeriodicElement {
   name: string;
@@ -48,12 +49,14 @@ export class SignalTableComponent implements OnInit {
   dataSource = new MatTableDataSource<SignalElement>([]);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatTable, { static: false }) table: MatTable<any>;
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
 
   add() {
+    // window.alert('Update table');
     ELEMENT_DATA.push({
       position: 10,
       name: 'SX',
@@ -61,6 +64,7 @@ export class SignalTableComponent implements OnInit {
       data: [2, 2, 2, 2],
     });
     this.dataSource.data = ELEMENT_DATA;
+    this.table.renderRows();
   }
 }
 
