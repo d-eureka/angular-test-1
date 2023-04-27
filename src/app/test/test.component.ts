@@ -9,12 +9,27 @@ import { SignalElement, SignalService } from '../services/signal.service';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
 })
+// export class TestComponent implements OnInit {
+//   constructor(
+//     // signalTable: SignalTableComponent
+//     private signalService: SignalService
+//   ) {}
+
+//   ngOnInit(): void {}
+
+//   mergeOptions: EChartsOption;
+
+//   // generateService() {
+//   //   this.signalService.generateNew().subscribe((data: SignalElement[]) => {
+//   //     this.mergeOptions.series = [];
+//   //   });
+//   // }
+// }
 export class TestComponent implements OnInit {
   constructor(
     private signalTable: SignalTableComponent,
     private signalService: SignalService
   ) {}
-  // constructor() {}
 
   options: any;
 
@@ -33,7 +48,20 @@ export class TestComponent implements OnInit {
 
   generateService() {
     this.signalService.generateNew().subscribe((data: SignalElement[]) => {
-      this.mergeOptions.series = [];
+      // this.mergeOptions.series = [];
+      // this.generate();
+
+      this.mergeOptions = {
+        xAxis: {
+          axisLabel: { show: true },
+          data: [],
+          silent: false,
+          splitLine: {
+            show: false,
+          },
+        },
+        series: [],
+      };
     });
   }
 
