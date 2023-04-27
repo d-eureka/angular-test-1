@@ -78,7 +78,7 @@ export class SignalTableComponent implements OnInit {
     this.dataSource.data = this.dataSource.data;
   }
 
-  add() {
+  update() {
     // window.alert('Update table');
 
     ELEMENT_DATA.push({

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { SignalTableComponent } from '../signal-table/signal-table.component';
+import { SignalElement, SignalService } from '../services/signal.service';
 
 @Component({
   providers: [SignalTableComponent],
@@ -9,8 +10,10 @@ import { SignalTableComponent } from '../signal-table/signal-table.component';
   styleUrls: ['./test.component.css'],
 })
 export class TestComponent implements OnInit {
-  constructor(private comp: SignalTableComponent) {}
-
+  constructor(
+    private signalTable: SignalTableComponent,
+    private signalService: SignalService
+  ) {}
   // constructor() {}
 
   options: any;
@@ -26,6 +29,12 @@ export class TestComponent implements OnInit {
     var gaussianConstant = 1 / Math.sqrt(2 * Math.PI);
     x = (x - mean) / sigma;
     return (gaussianConstant * Math.exp(-0.5 * x * x)) / sigma;
+  }
+
+  generateService() {
+    this.signalService.generateNew().subscribe((data: SignalElement[]) => {
+      this.mergeOptions.series = [];
+    });
   }
 
   generate() {
@@ -69,7 +78,7 @@ export class TestComponent implements OnInit {
     };
 
     // Create new entry in table
-    this.comp.add();
+    this.signalTable.update();
   }
 
   ngOnInit(): void {
