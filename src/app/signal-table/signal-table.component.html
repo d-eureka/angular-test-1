@@ -1,3 +1,16 @@
+<!-- <div *ngFor="let product of products"> -->
+<div class="test" *ngFor="let product of products; trackBy: customTB">
+  <div [title]="product.name + ' details'">
+    <h3>{{ product.name }}</h3>
+  </div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+  <div [title]="product.name + ' details'">
+    {{ product.peak_position }}
+  </div>
+
+  <!-- <p *ngIf="product.description">Description: {{ product.description }}</p> -->
+</div>
+
 <div>
   <table mat-table [dataSource]="dataSource">
     <!--- Note that these columns can be defined in any order.
